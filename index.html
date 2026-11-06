@@ -1,829 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alt Sprints</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        html {
-            font-size: 16px;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alt Sprints | Software development, consulting and owned businesses</title>
+<meta name="description" content="Alt Sprints Private Limited is a software development and consulting company in Lahore. It owns Moonshot School and Vitalis Living.">
+<meta property="og:title" content="Alt Sprints">
+<meta property="og:description" content="A software development and consulting company in Lahore. Owner of Moonshot School and Vitalis Living.">
+<meta property="og:url" content="https://altsprints.com/">
+<link rel="canonical" href="https://altsprints.com/">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --panel: #17171a;
+    --line: #2a2a2f;
+    --text: #f4f4f2;
+    --muted: #a1a1a6;
+    --gutter: clamp(20px, 5vw, 72px);
+    --wide: 1320px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.55 Geist, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { display: block; width: 100%; }
+  .wrap { max-width: var(--wide); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
 
-        html,
-        body {
-            height: 100%;
-        }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 24px; padding-bottom: 24px; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 500; font-size: 18px; text-decoration: none; }
+  .brand img { width: 36px; height: 36px; border-radius: 8px; }
+  header nav { display: flex; gap: 28px; font-size: 15px; color: var(--muted); }
+  header nav a { text-decoration: none; transition: color .16s; }
+  header nav a:hover { color: var(--text); }
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #111;
-            font-family: "helvetica neue", helvetica, sans-serif;
-            overflow: hidden;
-        }
+  .hero { padding-top: clamp(56px, 10vw, 136px); padding-bottom: clamp(56px, 8vw, 112px); }
+  h1 { margin: 0; max-width: 21ch; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.08; letter-spacing: -.035em; font-weight: 500; }
+  .lede { margin: 32px 0 0; max-width: 40rem; font-size: clamp(1.1rem, 1.7vw, 1.35rem); line-height: 1.45; color: var(--muted); }
 
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
+  section { border-top: 1px solid var(--line); padding-top: 28px; padding-bottom: clamp(56px, 8vw, 104px); }
+  h2 { margin: 0 0 clamp(28px, 4vw, 48px); font-size: 15px; font-weight: 500; color: var(--muted); }
 
-        .scroll {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.5);
-            font-family: "font-2";
-            font-size: calc(0.5rem + 0.35vw);
-            z-index: 10;
-        }
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 56px); }
+  .services h3 { margin: 0 0 10px; font-size: clamp(1.35rem, 2.2vw, 1.75rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+  .services p { margin: 0; color: var(--muted); }
 
-        .logo {
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0;
-            margin: 0;
-            z-index: 10;
-        }
+  .owned { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2.4vw, 32px); }
+  .biz { display: block; text-decoration: none; }
+  .biz figure { margin: 0; aspect-ratio: 7 / 5; overflow: hidden; border-radius: 6px; background: var(--panel); }
+  .biz img { height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .biz:hover img { transform: scale(1.025); }
+  .biz h3 { margin: 20px 0 4px; font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.15; }
+  .biz h3 span { display: inline-block; transition: transform .2s; }
+  .biz:hover h3 span { transform: translate(3px, -3px); }
+  .biz p { margin: 0; color: var(--muted); }
 
-        .logo img {
-            display: block;
-            height: 3rem;
-            width: auto;
-        }
 
-        ul,
-        li {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+  .company { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 56px); margin: 0; }
+  .company dt { font-size: 15px; color: var(--muted); margin-bottom: 6px; }
+  .company dd { margin: 0; font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.4; }
+  .company a { text-decoration: none; }
+  .company a:hover { text-decoration: underline; }
 
-        .nav {
-            position: absolute;
-            z-index: 10;
-        }
+  footer { border-top: 1px solid var(--line); padding-top: 24px; padding-bottom: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 14px; color: var(--muted); }
 
-        .nav--bottom-center {
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .nav--left {
-            top: 2rem;
-            left: 1rem;
-        }
-
-        .nav--right {
-            top: 2rem;
-            right: 1rem;
-        }
-
-        .nav--bottom {
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .nav--bottom-left {
-            bottom: 1rem;
-            left: 1rem;
-        }
-
-        .nav ul {
-            display: flex;
-            align-items: center;
-            height: 1rem;
-        }
-
-        .nav li {
-            display: block;
-            margin: 0 1rem;
-            padding: 0;
-        }
-
-        .nav a {
-            position: relative;
-            display: flex;
-            align-items: center;
-            font-size: calc(0.5rem + 0.35vw);
-            font-family: "helvetica neue", helvetica, sans-serif;
-        }
-
-        .nav a span {
-            position: relative;
-        }
-
-        .nav a span:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -0.35rem;
-            width: 100%;
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.25);
-            transition: transform 0.75s ease;
-            transform-origin: right;
-            transform: scaleX(0);
-        }
-
-        .nav a:hover span:before,
-        .nav a.is-active span:before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .vert-text {
-            position: absolute;
-            bottom: 2rem;
-            right: 2rem;
-            width: 15rem;
-            display: flex;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .vert-text span {
-            display: block;
-            color: #fff;
-            text-transform: uppercase;
-            line-height: 1.1;
-            transform: rotate(-90deg) translateY(15rem);
-            transform-origin: bottom left;
-            font-size: 1.35rem;
-        }
-
-        .cart-total {
-            display: block;
-            height: 2rem;
-            width: 2rem;
-            background-color: rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 2rem;
-            margin-left: 1rem;
-        }
-
-        .slider {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        .slider__text {
-            position: absolute;
-            bottom: calc(2rem + 3vw);
-            left: calc(2rem + 3vw);
-            z-index: 10;
-            font-size: calc(1rem + 4vw);
-            text-transform: uppercase;
-            transform-origin: top;
-            line-height: 1.075;
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .slider__text-line {
-            overflow: hidden;
-        }
-
-        .slider__inner {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        .slider__nav {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-
-        .slider-bullet {
-            display: flex;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .slider-bullet__text {
-            color: #fff;
-            font-size: 0.65rem;
-            margin-right: 1rem;
-        }
-
-        .slider-bullet__line {
-            background-color: #fff;
-            height: 1px;
-            width: 1rem;
-        }
-
-        .slider canvas {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        .slide {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-        }
-
-        .slide__content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        .slide__img {
-            position: relative;
-            width: 25vw;
-            height: 70vh;
-            padding: 0;
-            margin: 0;
-            min-width: 12.5rem;
-            transform-origin: top;
-        }
-
-        .slide__img:first-child {
-            top: -1.5rem;
-        }
-
-        .slide__img:last-child {
-            bottom: -1.5rem;
-        }
-
-        .slide__img img {
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            -o-object-fit: cover;
-            object-fit: cover;
-        }
-    </style>
+  @media (max-width: 760px) {
+    header nav { display: none; }
+    .services, .owned, .company { grid-template-columns: 1fr; }
+    .owned { gap: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
 </head>
-
 <body>
-    <nav class="nav nav--bottom-left" style="font-size: 13px; color: rgba(255,255,255,0.8); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-        <ul>
-            <li>
-                © Alt Sprints Private Limited. All Rights Reserved.
-              </li>
-              <li>
-                194-E, Block-E, Askari 10, Lahore Cantt, Lahore, Pakistan
-              </li>
-              <li>
-                +92 311 959 8887
-              </li>
-        </ul>
-    </nav>
 
-    <figure class="logo"
-        style="color: rgba(255, 255, 255,0.9); font-weight: 500; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-        <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/logo_copy_copy.svg"> -->
-        <img src="logo.png">
-        Sprints
+<header class="wrap">
+  <a class="brand" href="/"><img src="logo.png" alt="">Alt Sprints</a>
+  <nav aria-label="Main">
+    <a href="#businesses">Businesses</a>
+    <a href="#company">Company</a>
+  </nav>
+</header>
 
+<main>
+  <div class="wrap hero">
+    <h1>A software and consulting company with its own portfolio of businesses.</h1>
+    <p class="lede">Based in Lahore, Alt Sprints Private Limited develops software, advises companies and owns Moonshot School and Vitalis Living.</p>
+  </div>
 
-    </figure>
-
-    <nav class="nav nav--right">
-        <!-- <ul>
-          <li>
-            <a href="https://twitter.com/Jesper_Landberg?lang=en" target="_blank"><span>Say hi</span></a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Cart</span>
-              <div class="cart-total">0</div>
-            </a>
-          </li>
-        </ul> -->
-    </nav>
-
-    <div class="slider js-slider">
-        <div class="slider__inner js-slider__inner"></div>
-
-        <div class="slide js-slide">
-            <div class="slide__content">
-                <figure class="slide__img js-slide__img">
-                    <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/photo1.jpg"> -->
-                    <img src="https://vitalisliving.pk/cdn/shop/files/Artboard_1.jpg?v=1731155499&width=800">
-                </figure>
-                <figure class="slide__img js-slide__img">
-                    <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/photo2.jpg"> -->
-                    <img src="https://vitalisliving.pk/cdn/shop/files/TS_-_Liquid_Bottle_1_1.png?v=1733786009">
-                </figure>
-            </div>
-
-            <div class="slider__text js-slider__text">
-                <div class="slider__text-line js-slider__text-line">
-                    <a href="https://vitalisliving.pk/" target="__blank">
-                        <div>Vitalis Living
-                <p style="font-size: 16px; color: rgba(255,255,255,0.8); text-transform: none; margin: 10px;">Vitalis Living is fully owned by Alt Sprints</p>
-
-                        </div>
-
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="slide js-slide">
-            <div class="slide__content">
-                <figure class="slide__img js-slide__img">
-                    <img src="fg2.jpg">
-                </figure>
-                <figure class="slide__img js-slide__img">
-                    <img src="fg22.jpg">
-                </figure>
-            </div>
-            <div class="slider__text js-slider__text">
-                <div class="slider__text-line js-slider__text-line">
-                    <a href="https://chattertech.ai/" target="__blank">
-                    <div>Chatter Tech</div>
-                </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="slide js-slide">
-            <div class="slide__content">
-                <figure class="slide__img js-slide__img">
-                    <img src="fg31.jpg">
-                </figure>
-                <figure class="slide__img js-slide__img">
-                    <img src="fg3.jpg">
-                </figure>
-            </div>
-            <div class="slider__text js-slider__text">
-                <div class="slider__text-line js-slider__text-line">
-                    <a href="https://adamsmithinternational.com/" target="__blank">
-                    <div>ASI Global</div>
-                </a>
-                </div>
-            </div>
-        </div>
-        
-        <nav class="slider__nav js-slider__nav">
-            <div class="slider-bullet js-slider-bullet">
-                <span class="slider-bullet__text js-slider-bullet__text">01</span>
-                <span class="slider-bullet__line js-slider-bullet__line"></span>
-            </div>
-            <div class="slider-bullet js-slider-bullet">
-                <span class="slider-bullet__text js-slider-bullet__text">02</span>
-                <span class="slider-bullet__line js-slider-bullet__line"></span>
-            </div>
-            <div class="slider-bullet js-slider-bullet">
-                <span class="slider-bullet__text js-slider-bullet__text">03</span>
-                <span class="slider-bullet__line js-slider-bullet__line"></span>
-            </div>
-        </nav>
-
-        <div class="scroll js-scroll">Scroll</div>
-
+  <section class="wrap" aria-labelledby="h-do">
+    <h2 id="h-do">What we do</h2>
+    <div class="services">
+      <div>
+        <h3>Software development</h3>
+        <p>Custom software for our own businesses and for client companies.</p>
+      </div>
+      <div>
+        <h3>Consulting</h3>
+        <p>Product and growth advice for companies.</p>
+      </div>
+      <div>
+        <h3>Owned businesses</h3>
+        <p>Businesses we own and support, in education and health.</p>
+      </div>
     </div>
+  </section>
 
-    <div class="vert-text">
-        <span>
-            Powered by<br>
-            <a href="https://altventures.co/">
-                Alt Ventures
-
-            </a>
-        </span>
+  <section class="wrap" id="businesses" aria-labelledby="h-biz">
+    <h2 id="h-biz">Businesses we own</h2>
+    <div class="owned">
+      <a class="biz" href="https://moonshotschool.com/" target="_blank" rel="noopener">
+        <figure><img src="assets/moonshot.jpg" alt="Moonshot School logo" loading="lazy"></figure>
+        <h3>Moonshot School <span aria-hidden="true">↗</span></h3>
+        <p>A live AI course for teenagers.</p>
+      </a>
+      <a class="biz" href="https://vitalisliving.pk/" target="_blank" rel="noopener">
+        <figure><img src="assets/vitalis-box.jpg" alt="Vitalis Living Shilajit box" loading="lazy"></figure>
+        <h3>Vitalis Living <span aria-hidden="true">↗</span></h3>
+        <p>Premium supplements.</p>
+      </a>
     </div>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+  </section>
+
+
+  <section class="wrap" id="company" aria-labelledby="h-co">
+    <h2 id="h-co">Company</h2>
+    <dl class="company">
+      <div><dt>Legal name</dt><dd>Alt Sprints Private Limited</dd></div>
+      <div><dt>Address</dt><dd>194-E, Block-E, Askari 10, Lahore Cantt, Lahore, Pakistan</dd></div>
+      <div><dt>Phone</dt><dd><a href="tel:+923119598887">+92 311 959 8887</a></dd></div>
+    </dl>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© Alt Sprints Private Limited. All rights reserved.</span>
+  <span>Powered by <a href="https://altventures.co/">Alt Ventures</a></span>
+</footer>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
-    <script>
-
-        class Slider {
-            constructor() {
-                this.bindAll();
-
-                this.vert = `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-    `;
-
-                this.frag = `
-    varying vec2 vUv;
-
-    uniform sampler2D texture1;
-    uniform sampler2D texture2;
-    uniform sampler2D disp;
-
-    uniform float dispPower;
-    uniform float intensity;
-
-    uniform vec2 size;
-    uniform vec2 res;
-
-    vec2 backgroundCoverUv( vec2 screenSize, vec2 imageSize, vec2 uv ) {
-      float screenRatio = screenSize.x / screenSize.y;
-      float imageRatio = imageSize.x / imageSize.y;
-      vec2 newSize = screenRatio < imageRatio 
-          ? vec2(imageSize.x * (screenSize.y / imageSize.y), screenSize.y)
-          : vec2(screenSize.x, imageSize.y * (screenSize.x / imageSize.x));
-      vec2 newOffset = (screenRatio < imageRatio 
-          ? vec2((newSize.x - screenSize.x) / 2.0, 0.0) 
-          : vec2(0.0, (newSize.y - screenSize.y) / 2.0)) / newSize;
-      return uv * screenSize / newSize + newOffset;
-    }
-
-    void main() {
-      vec2 uv = vUv;
-      
-      vec4 disp = texture2D(disp, uv);
-      vec2 dispVec = vec2(disp.x, disp.y);
-      
-      vec2 distPos1 = uv + (dispVec * intensity * dispPower);
-      vec2 distPos2 = uv + (dispVec * -(intensity * (1.0 - dispPower)));
-      
-      vec4 _texture1 = texture2D(texture1, distPos1);
-      vec4 _texture2 = texture2D(texture2, distPos2);
-      
-      gl_FragColor = mix(_texture1, _texture2, dispPower);
-    }
-    `;
-
-                this.el = document.querySelector('.js-slider');
-                this.inner = this.el.querySelector('.js-slider__inner');
-                this.slides = [...this.el.querySelectorAll('.js-slide')];
-                this.bullets = [...this.el.querySelectorAll('.js-slider-bullet')];
-
-
-                this.renderer = null;
-                this.scene = null;
-                this.clock = null;
-                this.camera = null;
-
-                this.images = [
-                    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/bg1.jpg',
-                    'bg1.png',
-                    'bg2.jpg',
-                    'bg3.jpg'];
-
-
-                this.data = {
-                    current: 0,
-                    next: 1,
-                    total: this.images.length - 1,
-                    delta: 0
-                };
-
-
-                this.state = {
-                    animating: false,
-                    text: false,
-                    initial: true
-                };
-
-
-                this.textures = null;
-
-                this.init();
-            }
-
-            bindAll() {
-                ['render', 'nextSlide'].
-                    forEach(fn => this[fn] = this[fn].bind(this));
-            }
-
-            setStyles() {
-                this.slides.forEach((slide, index) => {
-                    if (index === 0) return;
-
-                    TweenMax.set(slide, { autoAlpha: 0 });
-                });
-
-                this.bullets.forEach((bullet, index) => {
-                    if (index === 0) return;
-
-                    const txt = bullet.querySelector('.js-slider-bullet__text');
-                    const line = bullet.querySelector('.js-slider-bullet__line');
-
-                    TweenMax.set(txt, {
-                        alpha: 0.25
-                    });
-
-                    TweenMax.set(line, {
-                        scaleX: 0,
-                        transformOrigin: 'left'
-                    });
-
-                });
-            }
-
-            cameraSetup() {
-                this.camera = new THREE.OrthographicCamera(
-                    this.el.offsetWidth / -2,
-                    this.el.offsetWidth / 2,
-                    this.el.offsetHeight / 2,
-                    this.el.offsetHeight / -2,
-                    1,
-                    1000);
-
-
-                this.camera.lookAt(this.scene.position);
-                this.camera.position.z = 1;
-            }
-
-            setup() {
-                this.scene = new THREE.Scene();
-                this.clock = new THREE.Clock(true);
-
-                this.renderer = new THREE.WebGLRenderer({ alpha: true });
-                this.renderer.setPixelRatio(window.devicePixelRatio);
-                this.renderer.setSize(this.el.offsetWidth, this.el.offsetHeight);
-
-                this.inner.appendChild(this.renderer.domElement);
-            }
-
-            loadTextures() {
-                const loader = new THREE.TextureLoader();
-                loader.crossOrigin = '';
-
-                this.textures = [];
-                this.images.forEach((image, index) => {
-                    const texture = loader.load(image + '?v=' + Date.now(), this.render);
-
-                    texture.minFilter = THREE.LinearFilter;
-                    texture.generateMipmaps = false;
-
-                    if (index === 0 && this.mat) {
-                        this.mat.uniforms.size.value = [
-                            texture.image.naturalWidth,
-                            texture.image.naturalHeight];
-
-                    }
-
-                    this.textures.push(texture);
-                });
-
-                this.disp = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/rock-_disp.png', this.render);
-                this.disp.magFilter = this.disp.minFilter = THREE.LinearFilter;
-                this.disp.wrapS = this.disp.wrapT = THREE.RepeatWrapping;
-            }
-
-            createMesh() {
-                this.mat = new THREE.ShaderMaterial({
-                    uniforms: {
-                        dispPower: { type: 'f', value: 0.0 },
-                        intensity: { type: 'f', value: 0.5 },
-                        res: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-                        size: { value: new THREE.Vector2(1, 1) },
-                        texture1: { type: 't', value: this.textures[0] },
-                        texture2: { type: 't', value: this.textures[1] },
-                        disp: { type: 't', value: this.disp }
-                    },
-
-                    transparent: true,
-                    vertexShader: this.vert,
-                    fragmentShader: this.frag
-                });
-
-
-                const geometry = new THREE.PlaneBufferGeometry(
-                    this.el.offsetWidth,
-                    this.el.offsetHeight,
-                    1);
-
-
-                const mesh = new THREE.Mesh(geometry, this.mat);
-
-                this.scene.add(mesh);
-            }
-
-            transitionNext() {
-                TweenMax.to(this.mat.uniforms.dispPower, 2.5, {
-                    value: 1,
-                    ease: Expo.easeInOut,
-                    onUpdate: this.render,
-                    onComplete: () => {
-                        this.mat.uniforms.dispPower.value = 0.0;
-                        this.changeTexture();
-                        this.render.bind(this);
-                        this.state.animating = false;
-                    }
-                });
-
-
-                const current = this.slides[this.data.current];
-                const next = this.slides[this.data.next];
-
-                const currentImages = current.querySelectorAll('.js-slide__img');
-                const nextImages = next.querySelectorAll('.js-slide__img');
-
-                const currentText = current.querySelectorAll('.js-slider__text-line div');
-                const nextText = next.querySelectorAll('.js-slider__text-line div');
-
-                const currentBullet = this.bullets[this.data.current];
-                const nextBullet = this.bullets[this.data.next];
-
-                const currentBulletTxt = currentBullet.querySelectorAll('.js-slider-bullet__text');
-                const nextBulletTxt = nextBullet.querySelectorAll('.js-slider-bullet__text');
-
-                const currentBulletLine = currentBullet.querySelectorAll('.js-slider-bullet__line');
-                const nextBulletLine = nextBullet.querySelectorAll('.js-slider-bullet__line');
-
-                const tl = new TimelineMax({ paused: true });
-
-                // console.log(document.querySelectorAll('.js-slide__img')); // Check if elements are selected
-
-
-                if (this.state.initial) {
-                    TweenMax.to('.js-scroll', 1.5, {
-                        yPercent: 100,
-                        alpha: 0,
-                        ease: Power4.easeInOut
-                    });
-
-
-                    this.state.initial = false;
-                }
-
-                tl.
-                    staggerFromTo(currentImages, 1.5, {
-                        yPercent: 0,
-                        scale: 1
-                    },
-                        {
-                            yPercent: -185,
-                            scaleY: 1.5,
-                            ease: Expo.easeInOut
-                        },
-                        0.075).
-                    to(currentBulletTxt, 1.5, {
-                        alpha: 0.25,
-                        ease: Linear.easeNone
-                    },
-                        0).
-                    set(currentBulletLine, {
-                        transformOrigin: 'right'
-                    },
-                        0).
-                    to(currentBulletLine, 1.5, {
-                        scaleX: 0,
-                        ease: Expo.easeInOut
-                    },
-                        0);
-
-                if (currentText) {
-                    tl.
-                        fromTo(currentText, 2, {
-                            yPercent: 0
-                        },
-                            {
-                                yPercent: -100,
-                                ease: Power4.easeInOut
-                            },
-                            0);
-                }
-
-                tl.
-                    set(current, {
-                        autoAlpha: 0
-                    }).
-
-                    set(next, {
-                        autoAlpha: 1
-                    },
-                        1);
-
-                if (nextText) {
-                    tl.
-                        fromTo(nextText, 2, {
-                            yPercent: 100
-                        },
-                            {
-                                yPercent: 0,
-                                ease: Power4.easeOut
-                            },
-                            1.5);
-                }
-
-                tl.
-                    staggerFromTo(nextImages, 1.5, {
-                        yPercent: 150,
-                        scaleY: 1.5
-                    },
-                        {
-                            yPercent: 0,
-                            scaleY: 1,
-                            ease: Expo.easeInOut
-                        },
-                        0.075, 1).
-                    to(nextBulletTxt, 1.5, {
-                        alpha: 1,
-                        ease: Linear.easeNone
-                    },
-                        1).
-                    set(nextBulletLine, {
-                        transformOrigin: 'left'
-                    },
-                        1).
-                    to(nextBulletLine, 1.5, {
-                        scaleX: 1,
-                        ease: Expo.easeInOut
-                    },
-                        1);
-
-                tl.play();
-            }
-
-            prevSlide() {
-
-            }
-
-            nextSlide() {
-                if (this.state.animating) return;
-
-                this.state.animating = true;
-
-                this.transitionNext();
-
-                this.data.current = this.data.current === this.data.total ? 0 : this.data.current + 1;
-                this.data.next = this.data.current === this.data.total ? 0 : this.data.current + 1;
-            }
-
-            changeTexture() {
-                this.mat.uniforms.texture1.value = this.textures[this.data.current];
-                this.mat.uniforms.texture2.value = this.textures[this.data.next];
-            }
-
-            listeners() {
-                window.addEventListener('wheel', this.nextSlide, { passive: true });
-            }
-
-            render() {
-                this.renderer.render(this.scene, this.camera);
-            }
-
-            init() {
-                this.setup();
-                this.cameraSetup();
-                this.loadTextures();
-                this.createMesh();
-                this.setStyles();
-                this.render();
-                this.listeners();
-            }
-        }
-
-
-        // Toggle active link
-        const links = document.querySelectorAll('.js-nav a');
-
-        links.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                links.forEach(other => other.classList.remove('is-active'));
-                link.classList.add('is-active');
-            });
-        });
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const slider = new Slider();
-        });
-    </script>
 </body>
-
 </html>
